@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
-import { addContact } from "../../redux/PhoneBook/actions";
+import { addNewContact } from "../../redux/PhoneBook/operation";
 import { contacts } from "../../redux/PhoneBook/selectors";
 import { Form, Label, Input, Button } from "./ContactForm.styled";
 
@@ -41,9 +41,12 @@ function ContactForm() {
       number,
     };
 
-    stateContacts.some((contact) => contact.name === contactToAdd.name)
+    stateContacts.some(
+      (contact) =>
+        contact.name.toLowerCase() === contactToAdd.name.toLowerCase()
+    )
       ? notify(contactToAdd.name)
-      : dispatch(addContact(contactToAdd));
+      : dispatch(addNewContact(contactToAdd));
   };
 
   return (
